@@ -1,0 +1,15 @@
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 0 8px var(--color-brand-300));
+  }
+  50% {
+    transform: translateY(-12px);
+    filter: drop-shadow(0 0 16px var(--color-brand-300));
+  }
+}
+
+
+@utility ui-logo-anim {
+  @apply motion-safe:animate-[float_5s_ease-in-out_infinite];
+}

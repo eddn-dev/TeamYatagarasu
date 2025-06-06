@@ -1,0 +1,48 @@
+@utility ui-btn {
+  @apply inline-flex items-center justify-center font-display text-sm font-bold
+         px-5 py-2.5 rounded-lg shadow-card transition
+         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+@utility ui-btn-primary {
+  @apply ui-btn bg-brand-500 text-white hover:bg-brand-600
+         focus-visible:outline-brand-600
+         hover:shadow-[0_0_15px_-3px_var(--color-brand-300)]; /* <-- Añadido/modificado */
+}
+
+
+
+@utility ui-btn-ghost {
+  @apply ui-btn text-brand-500 hover:text-brand-600 hover:bg-card/50;
+}
+
+/* ---------- Tarjetas de portafolio ---------- */
+@utility ui-card {
+  @apply flex flex-col text-left bg-card text-text-light rounded-lg
+         border-2 border-card-border shadow-card p-5
+         transition hover:bg-card-hover hover:-translate-y-1
+         hover:border-card-border-hover;
+}
+
+/* ---------- barra de navegación ---------- */
+@utility ui-nav          { @apply fixed top-0 w-full z-50 flex items-center justify-between gap-8
+                                 py-3 px-4 font-display text-sm transition-all duration-300
+                                 bg-transparent backdrop-blur supports-[backdrop-filter]:bg-transparent; }
+@utility ui-nav--scrolled{ @apply bg-dark-800/80 shadow-md supports-[backdrop-filter]:bg-dark-800/60; }
+
+/* ---------- botón hamburguesa ---------- */
+@utility ui-nav-toggle       { @apply md:hidden relative w-8 h-6 cursor-pointer select-none; }
+@utility ui-toggle-line      { @apply absolute left-0 w-full h-[3px] rounded bg-text-light transition-transform duration-300; }
+@utility ui-toggle-line-top    { top:0; }
+@utility ui-toggle-line-mid    { @apply top-1/2 -translate-y-1/2; }   /* Nótese el guion único −  :contentReference[oaicite:1]{index=1} */
+@utility ui-toggle-line-bot    { bottom:0; }
+
+/* ---- estados “en X” (se añaden con JS) ---- */
+@utility ui-x-top { @apply rotate-45  translate-y-[9px]; }
+@utility ui-x-mid { @apply opacity-0; }
+@utility ui-x-bot { @apply -rotate-45 -translate-y-[9px]; }
+
+/* ---------- lista enlaces ---------- */
+@utility ui-nav-list       { @apply hidden md:flex gap-6 items-center; }
+@utility ui-nav-list-open  { @apply flex flex-col gap-4 mt-6; }  /* visible en móvil al abrir */
+@utility ui-nav-link       { @apply hover:text-brand-300 focus-visible:outline-brand-500; }

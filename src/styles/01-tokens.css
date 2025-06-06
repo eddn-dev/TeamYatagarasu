@@ -1,0 +1,37 @@
+@theme {
+  /* fuentes */
+  --font-display: "Pixelify Sans", sans-serif;
+  --font-body:    "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* marca crimson */
+  --color-brand-500: #e01f3d;
+  --color-brand-600: #ff3b5c;
+
+  /* texto gris */
+  --color-text-light:  #e0e0e0;
+  --color-text-muted:  #b0b0b0;
+
+  /* fondos oscuros */
+  --color-dark-900: #121212;
+  --color-dark-800: #1f1f1f;
+
+  /* tarjetas */
+  --color-card:               #2a2a2a;
+  --color-card-hover:         #333333;
+  --color-card-border:        rgba(80,80,80,.5);
+  --color-card-border-hover:  var(--color-brand-500);
+
+  /* terminal */
+  --color-terminal-bg:      #0a0a0a;
+  --color-terminal-header:  #1a1a1a;
+  --color-terminal-prompt:  var(--color-text-muted);
+
+  /* efectos */
+  --shadow-card: 0 2px 5px #0a0a0a;
+  --radius-lg:   15px;
+  --color-accent-500: #00e0ff;
+
+    /* variante clara y oscura para crear profundidad */
+    --color-brand-300: #ff6d86;  /* Highlight rosado */
+    --color-brand-700: #991228;  /* Rojo oscuro para el degradado intermedio */
+}
