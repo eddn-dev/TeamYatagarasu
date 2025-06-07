@@ -63,18 +63,62 @@
 
 @keyframes pan-stars {
   from { background-position: 0 0;   }
-  to   { background-position: -2000px 1000px; }
+  to   { background-position: -2000px 1000px; } /* Or adjust for different layers if needed */
 }
-@utility ui-stars {
-  @apply absolute inset-0 pointer-events-none opacity-20;
+
+/* Base star properties */
+@utility ui-stars-base {
+  @apply absolute inset-0 pointer-events-none;
   background-image:
-    radial-gradient(2px 2px at 20% 30%, #ffffff 0%, transparent 100%),
-    radial-gradient(2px 2px at 70% 80%, #ff6d86 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 40% 60%, #ffffff 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 90% 10%, #ff6d86 0%, transparent 100%);
+    radial-gradient(1px 1px at 20% 30%, #ffffff 0%, transparent 100%), /* smaller base stars */
+    radial-gradient(1px 1px at 70% 80%, #ff6d86 0%, transparent 100%), /* smaller base stars */
+    radial-gradient(0.5px 0.5px at 40% 60%, #ffffff 0%, transparent 100%), /* smaller base stars */
+    radial-gradient(0.5px 0.5px at 90% 10%, #ff6d86 0%, transparent 100%); /* smaller base stars */
   background-repeat: repeat;
-  background-size: 800px 800px;
-  animation: pan-stars 120s linear infinite;
+}
+
+/* Original ui-stars, now using the base and animation will be conditional */
+@utility ui-stars {
+  @apply ui-stars-base;
+  opacity: 0.20; /* Original opacity */
+  background-size: 800px 800px; /* Original size */
+  /* Animation is moved to media query */
+}
+
+@utility ui-stars--far {
+  @apply ui-stars-base;
+  opacity: 0.15;
+  transform: scale(0.75);
+  background-size: 400px 400px; /* More, smaller stars for far effect */
+}
+
+@utility ui-stars--mid {
+  @apply ui-stars-base;
+  opacity: 0.25;
+  transform: scale(0.9);
+  background-size: 800px 800px; /* Similar to original, or slightly adjusted */
+}
+
+@utility ui-stars--near {
+  @apply ui-stars-base;
+  opacity: 0.35;
+  /* transform: scale(1.0); /* Default scale, no transform needed or explicit scale(1) */
+  background-size: 1000px 1000px; /* Fewer, larger stars for near effect */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ui-stars { /* Original ui-stars animation */
+    animation: pan-stars 120s linear infinite;
+  }
+  .ui-stars--far {
+    animation: pan-stars 300s linear infinite;
+  }
+  .ui-stars--mid {
+    animation: pan-stars 180s linear infinite;
+  }
+  .ui-stars--near {
+    animation: pan-stars 90s linear infinite;
+  }
 }
 
 /* ---------- separador diagonal inferior ---------- */
