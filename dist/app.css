@@ -210,15 +210,34 @@
   }
 }
 @layer utilities {
-  .ui-stars {
+  .ui-stars--far {
     pointer-events: none;
     position: absolute;
     inset: calc(var(--spacing) * 0);
-    opacity: 20%;
-    background-image: radial-gradient(2px 2px at 20% 30%, #ffffff 0%, transparent 100%), radial-gradient(2px 2px at 70% 80%, #ff6d86 0%, transparent 100%), radial-gradient(1.5px 1.5px at 40% 60%, #ffffff 0%, transparent 100%), radial-gradient(1.5px 1.5px at 90% 10%, #ff6d86 0%, transparent 100%);
+    background-image: radial-gradient(1px 1px at 20% 30%, #ffffff 0%, transparent 100%),  radial-gradient(1px 1px at 70% 80%, #ff6d86 0%, transparent 100%),  radial-gradient(0.5px 0.5px at 40% 60%, #ffffff 0%, transparent 100%),  radial-gradient(0.5px 0.5px at 90% 10%, #ff6d86 0%, transparent 100%);
     background-repeat: repeat;
+    opacity: 0.15;
+    transform: scale(0.75);
+    background-size: 400px 400px;
+  }
+  .ui-stars--mid {
+    pointer-events: none;
+    position: absolute;
+    inset: calc(var(--spacing) * 0);
+    background-image: radial-gradient(1px 1px at 20% 30%, #ffffff 0%, transparent 100%),  radial-gradient(1px 1px at 70% 80%, #ff6d86 0%, transparent 100%),  radial-gradient(0.5px 0.5px at 40% 60%, #ffffff 0%, transparent 100%),  radial-gradient(0.5px 0.5px at 90% 10%, #ff6d86 0%, transparent 100%);
+    background-repeat: repeat;
+    opacity: 0.25;
+    transform: scale(0.9);
     background-size: 800px 800px;
-    animation: pan-stars 120s linear infinite;
+  }
+  .ui-stars--near {
+    pointer-events: none;
+    position: absolute;
+    inset: calc(var(--spacing) * 0);
+    background-image: radial-gradient(1px 1px at 20% 30%, #ffffff 0%, transparent 100%),  radial-gradient(1px 1px at 70% 80%, #ff6d86 0%, transparent 100%),  radial-gradient(0.5px 0.5px at 40% 60%, #ffffff 0%, transparent 100%),  radial-gradient(0.5px 0.5px at 90% 10%, #ff6d86 0%, transparent 100%);
+    background-repeat: repeat;
+    opacity: 0.35;
+    background-size: 1000px 1000px;
   }
   .ui-noise-overlay {
     pointer-events: none;
@@ -237,6 +256,15 @@
     mix-blend-mode: overlay;
     background-image: repeating-linear-gradient( to bottom, rgba(0,0,0,.6) 0 1px, transparent 1px 3px );
     background-size: 100% 4px;
+  }
+  .ui-crt-overlay {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: calc(var(--spacing) * 0);
+    opacity: 15%;
+    mix-blend-mode: overlay;
+    background-image: repeating-linear-gradient( to bottom, rgba(255,255,255,.04) 0 2px, transparent 2px 4px );
   }
   .ui-nav {
     position: fixed;
@@ -505,7 +533,7 @@
   .ui-grid-cards {
     display: grid;
     gap: calc(var(--spacing) * 6);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   }
   .ui-social-list {
     display: flex;
@@ -576,6 +604,9 @@
   }
   .hidden {
     display: none;
+  }
+  .inline {
+    display: inline;
   }
   .ui-social-icon {
     height: calc(var(--spacing) * 16);
@@ -931,6 +962,30 @@
     background-color: var(--color-dark-700);
   }
 }
+.ui-card {
+  border-width: 8px;
+  border-image: url('/img/cartucho-border.png') 8 stretch;
+  image-rendering: pixelated;
+}
+.ui-card h3 {
+  font-family: var(--font-display);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ui-card {
+    transform: perspective(600px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+    transition: transform 0.2s;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ui-crt-overlay {
+    animation: crt-flicker 120ms steps(3) infinite;
+  }
+}
+@keyframes crt-flicker {
+  50% {
+    opacity: .25;
+  }
+}
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -947,6 +1002,20 @@
   }
   to {
     background-position: -2000px 1000px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ui-stars {
+    animation: pan-stars 120s linear infinite;
+  }
+  .ui-stars--far {
+    animation: pan-stars 300s linear infinite;
+  }
+  .ui-stars--mid {
+    animation: pan-stars 180s linear infinite;
+  }
+  .ui-stars--near {
+    animation: pan-stars 90s linear infinite;
   }
 }
 @property --tw-duration {
