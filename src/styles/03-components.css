@@ -124,3 +124,22 @@
   /* The transition for the scale effect will be inherited from .ui-btn's 'transition' class. */
   /* The hover shadow from ui-btn-primary is also inherited. */
 }
+
+/* Component styles for ui-card */
+.ui-card {
+  @apply pixel-border; /* Apply the pixel-border utility */
+  /* Other card-specific styles can go here if needed */
+}
+
+.ui-card h3 {
+  @apply font-display; /* Apply retro font to h3 titles within cards */
+  /* Ensure this doesn't override other necessary text properties like color or size by checking existing h3 styles */
+}
+
+/* 추가된 3D 틸트 효과 스타일 */
+@media (prefers-reduced-motion: no-preference) {
+  .ui-card {
+    transform: perspective(600px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+    transition: transform 0.2s;
+  }
+}

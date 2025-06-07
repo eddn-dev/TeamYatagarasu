@@ -51,3 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.matches) setOpen(false); // evita que quede abierto al redimensionar
   });
 });
+
+// ---------- 3D Tilt Effect for Cards ----------
+document.querySelectorAll('.ui-card').forEach(card => {
+  card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect(),
+          x = e.clientX - r.left,
+          y = e.clientY - r.top;
+    card.style.setProperty('--rx', (-(y - r.height / 2) / 12) + 'deg');
+    card.style.setProperty('--ry', ((x - r.width / 2) / 12) + 'deg');
+  });
+  card.addEventListener('pointerleave', () => card.style.cssText = ''); // Resets all inline styles
+});

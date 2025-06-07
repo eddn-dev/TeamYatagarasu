@@ -1,7 +1,7 @@
 /* ---------- Grid responsivo 300 px ---------- */
 @utility ui-grid-cards {
   @apply grid gap-6;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   /* Tailwind permite valores arbitrarios dentro de @utility :contentReference[oaicite:2]{index=2} */
 }
 
@@ -13,4 +13,40 @@
     transparent 1px 3px
   );
   background-size: 100% 4px;
+}
+
+/* ---------- Pixel Border Utility ---------- */
+@utility pixel-border {
+  border-width: 8px;
+  border-image: url('/img/cartucho-border.png') 8 stretch;
+  image-rendering: pixelated;
+}
+
+/* ---------- CRT Overlay Utility ---------- */
+@utility ui-crt-overlay {
+  content: '';
+  @apply absolute inset-0 pointer-events-none mix-blend-overlay opacity-15;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.04) 0 2px,
+    transparent 2px 4px
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ui-crt-overlay { /* Apply animation only if no preference for reduced motion */
+    animation: crt-flicker 120ms steps(3) infinite;
+  }
+  /* The .ui-card transform for tilt effect will be added in a later step,
+     but its animation-related aspect (the transition) is tied to this media query.
+     However, since the transform itself is not defined here, we will add the
+     .ui-card specific rule in step 3.
+     The keyframes are defined below.
+  */
+}
+
+@keyframes crt-flicker {
+  50% {
+    opacity: .25;
+  }
 }
