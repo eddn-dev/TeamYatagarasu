@@ -30,7 +30,7 @@
   /* El fondo se añade con JS al hacer scroll, está bien así */
 }
 @utility ui-nav--scrolled {
-  @apply bg-dark-800/80 shadow-md supports-[backdrop-filter]:bg-dark-800/60;
+  @apply bg-dark-800/90 shadow-md supports-[backdrop-filter]:bg-dark-800/75; /* MODIFIED opacities */
 }
 @utility ui-nav-inner {
   @apply max-w-7xl mx-auto flex items-center justify-between w-full px-4 md:px-8 h-20; /* Altura fija para evitar saltos de layout */
@@ -56,18 +56,44 @@
 
 /* --- Panel Móvil (Mobile-First) --- */
 /* Estilos base del panel: oculto fuera de la pantalla por defecto */
-@utility ui-nav-mobile-panel {
+.ui-panel { /* MODIFIED: Was @utility ui-nav-mobile-panel */
   @apply fixed inset-0 z-[50] bg-dark-800/90 backdrop-blur-sm
-         flex flex-col items-center justify-center gap-8
-         transition-transform duration-300 ease-in-out md:hidden;
+         flex flex-col justify-center gap-8
+         transition-transform duration-300 ease-in-out md:hidden
+         overflow-y-auto /* ADDED for scrolling */
+         py-10 /* ADDED padding for top/bottom */
+         gap-6 /* MODIFIED: was gap-8 */
+         items-stretch; /* MODIFIED: from items-center */
+  max-height: 100dvh; /* ADDED max height */
   transform: translateX(100%); /* <-- Inicia fuera de la pantalla a la derecha */
   visibility: hidden;
 }
 
+/* Wrapper para el contenido del menú móvil, centrado y con padding */
+@utility ui-mobile-menu-wrapper {
+  max-width: 320px; /* Equivalente a theme('screens.xs') */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; /* Equivalente a theme('spacing.4') */
+  padding-right: 1rem; /* Equivalente a theme('spacing.4') */
+  @apply flex flex-col items-center w-full;
+}
+
 /* Estado abierto: se desliza a la vista */
-@utility ui-nav-mobile-panel--open {
+.ui-panel.ui-nav-mobile-panel--open { /* MODIFIED: Was @utility ui-nav-mobile-panel--open, now targets .ui-panel with the open class */
   transform: translateX(0);
   visibility: visible;
+}
+
+/* Styles for links specifically within the mobile panel */
+.ui-panel .ui-link {
+  @apply text-center w-full /* Ensure text is centered and link takes full width */
+         py-3                 /* Add vertical padding to each link */
+         rounded-md           /* Add rounded corners for the hover background */
+         hover:bg-dark-700    /* Add a subtle background on hover */
+         focus-visible:bg-dark-700; /* Add a subtle background on focus */
+  /* Links will inherit font, color, and text size from their existing .ui-link class */
+  /* and text-2xl from the HTML. The hover:text-brand-300 from .ui-link will also apply. */
 }
 
 /* --- Enlaces de Navegación --- */
@@ -77,17 +103,24 @@
 }
 
 /* Estilo común para todos los enlaces de navegación (móvil y desktop) */
-@utility ui-nav-link {
-  @apply font-display tracking-wider text-text-light text-lg
+@utility ui-link {
+  @apply tracking-wider text-text-light text-lg
          transition-colors hover:text-brand-300
          focus-visible:outline-none focus-visible:ring-2
          focus-visible:ring-offset-2 focus-visible:ring-offset-dark-900
          focus-visible:ring-brand-500 rounded;
+  font-family: 'Pixelify Sans', sans-serif; /* Explicit font family */
 }
 
 /* --- Consistencia en el CTA (Botón Contacto) --- */
 /* Se aplica tanto en el botón de desktop como en el de móvil para consistencia */
-@utility ui-nav-cta {
-   /* Hereda de ui-btn-primary pero con la fuente de la navegación */
-  @apply ui-btn-primary font-display tracking-wider;
+@utility ui-cta {
+  @apply ui-btn-primary tracking-wider /* Base styles from ui-btn-primary */
+         text-base px-6 py-3        /* ADDED: Consistent font size and padding */
+         hover:scale-105            /* ADDED: Scale effect on hover */
+         focus-visible:scale-105    /* ADDED: Scale effect on focus */
+         active:scale-100;          /* ADDED: Reset scale on active/click */
+  font-family: 'Pixelify Sans', sans-serif; /* Explicit font family */
+  /* The transition for the scale effect will be inherited from .ui-btn's 'transition' class. */
+  /* The hover shadow from ui-btn-primary is also inherited. */
 }

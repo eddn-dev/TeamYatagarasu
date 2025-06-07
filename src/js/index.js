@@ -18,9 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- 2. Abrir / cerrar panel móvil ---------------------------- */
   const setOpen = (open) => {
-    nav.dataset.open      = open.toString();
+    toggle.dataset.open   = open.toString();
     toggle.ariaExpanded   = open.toString();
-    panel.hidden          = !open; // oculta panel para evitar tab-focus fuera de vista
+
+    if (open) {
+      panel.classList.add('ui-nav-mobile-panel--open');
+    } else {
+      panel.classList.remove('ui-nav-mobile-panel--open');
+    }
   };
 
   // Estado inicial (cerrado)
@@ -28,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Click hamburguesa
   toggle.addEventListener('click', () =>
-    setOpen(nav.dataset.open === 'false')
+    setOpen(toggle.dataset.open === 'false')
   );
 
   // Cerrar al pulsar ESC

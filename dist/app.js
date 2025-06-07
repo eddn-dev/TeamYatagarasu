@@ -12,14 +12,18 @@
       ).observe(hero);
     }
     const setOpen = (open) => {
-      nav.dataset.open = open.toString();
+      toggle.dataset.open = open.toString();
       toggle.ariaExpanded = open.toString();
-      panel.hidden = !open;
+      if (open) {
+        panel.classList.add("ui-nav-mobile-panel--open");
+      } else {
+        panel.classList.remove("ui-nav-mobile-panel--open");
+      }
     };
     setOpen(false);
     toggle.addEventListener(
       "click",
-      () => setOpen(nav.dataset.open === "false")
+      () => setOpen(toggle.dataset.open === "false")
     );
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") setOpen(false);

@@ -33,16 +33,16 @@
     </a>
 
     <!-- Enlaces de escritorio -->
-    <div class="ui-nav-list" role="navigation">
+    <div class="ui-nav-links-desktop" role="navigation">
       <a href="#proyectos"      class="ui-link">Proyectos</a>
       <a href="#especialidades" class="ui-link">Especialidades</a>
       <a href="#sobre-mi"       class="ui-link">Sobre&nbsp;Mí</a>
-      <a href="#contacto"       class="ui-btn-cta text-xs px-3 py-1.5">Contacto</a>
+      <a href="#contacto"       class="ui-cta">Contacto</a>
     </div>
 
     <!-- Botón hamburguesa -->
     <button id="navToggle"
-            class="ui-toggle"
+            class="ui-nav-toggle"
             aria-controls="mobilePanel"
             aria-expanded="false">
       <span class="ui-bar ui-bar-top"></span>
@@ -54,10 +54,12 @@
 
   <!-- Panel móvil -->
   <div id="mobilePanel" class="ui-panel" role="menu">
-    <a href="#proyectos"      class="ui-link text-2xl" role="menuitem">Proyectos</a>
-    <a href="#especialidades" class="ui-link text-2xl" role="menuitem">Especialidades</a>
-    <a href="#sobre-mi"       class="ui-link text-2xl" role="menuitem">Sobre&nbsp;Mí</a>
-    <a href="#contacto"       class="ui-btn-cta px-6 py-2 mt-4" role="menuitem">Contacto</a>
+    <div class="ui-mobile-menu-wrapper">
+      <a href="#proyectos"      class="ui-link text-2xl" role="menuitem">Proyectos</a>
+      <a href="#especialidades" class="ui-link text-2xl" role="menuitem">Especialidades</a>
+      <a href="#sobre-mi"       class="ui-link text-2xl" role="menuitem">Sobre&nbsp;Mí</a>
+      <a href="#contacto"       class="ui-cta mt-4" role="menuitem">Contacto</a>
+    </div>
   </div>
 </nav>
 
@@ -80,7 +82,7 @@
     Desarrollador de Videojuegos Indie &amp; Artista Pixel Art
   </p>
 
-  <a href="#proyectos" class="ui-btn-primary hover:shadow-[0_0_20px_-4px_var(--color-brand-300)]">
+  <a href="#proyectos" class="ui-cta">
     VER MIS PROYECTOS
   </a>
 
