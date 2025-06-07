@@ -24,25 +24,70 @@
          hover:border-card-border-hover;
 }
 
-/* ---------- barra de navegación ---------- */
-@utility ui-nav          { @apply fixed top-0 w-full z-50 flex items-center justify-between gap-8
-                                 py-3 px-4 font-display text-sm transition-all duration-300
-                                 bg-transparent backdrop-blur supports-[backdrop-filter]:bg-transparent; }
-@utility ui-nav--scrolled{ @apply bg-dark-800/80 shadow-md supports-[backdrop-filter]:bg-dark-800/60; }
+/* --- Wrapper Principal --- */
+@utility ui-nav {
+  @apply fixed top-0 inset-x-0 z-50 transition-all duration-300;
+  /* El fondo se añade con JS al hacer scroll, está bien así */
+}
+@utility ui-nav--scrolled {
+  @apply bg-dark-800/80 shadow-md supports-[backdrop-filter]:bg-dark-800/60;
+}
+@utility ui-nav-inner {
+  @apply max-w-7xl mx-auto flex items-center justify-between w-full px-4 md:px-8 h-20; /* Altura fija para evitar saltos de layout */
+}
 
-/* ---------- botón hamburguesa ---------- */
-@utility ui-nav-toggle       { @apply md:hidden relative w-8 h-6 cursor-pointer select-none; }
-@utility ui-toggle-line      { @apply absolute left-0 w-full h-[3px] rounded bg-text-light transition-transform duration-300; }
-@utility ui-toggle-line-top    { top:0; }
-@utility ui-toggle-line-mid    { @apply top-1/2 -translate-y-1/2; }   /* Nótese el guion único −  :contentReference[oaicite:1]{index=1} */
-@utility ui-toggle-line-bot    { bottom:0; }
+/* --- Botón Hamburguesa (Toggle) --- */
+@utility ui-nav-toggle {
+  @apply md:hidden relative w-8 h-6 cursor-pointer z-[51]; /* z-index superior al panel */
+}
+@utility ui-bar {
+  @apply absolute left-0 w-full h-[3px] rounded bg-text-light transition-all duration-300;
+}
+@utility ui-bar-top    { @apply top-0; }
+@utility ui-bar-mid    { @apply top-1/2 -translate-y-1/2; }
+@utility ui-bar-bot    { @apply bottom-0; }
 
-/* ---- estados “en X” (se añaden con JS) ---- */
-@utility ui-x-top { @apply rotate-45  translate-y-[9px]; }
-@utility ui-x-mid { @apply opacity-0; }
-@utility ui-x-bot { @apply -rotate-45 -translate-y-[9px]; }
+/* Sin @utility — selector puro */
+.ui-nav-toggle[data-open="true"] .ui-bar-top { @apply translate-y-[9.5px] rotate-45; }
+.ui-nav-toggle[data-open="true"] .ui-bar-mid { @apply opacity-0; }
+.ui-nav-toggle[data-open="true"] .ui-bar-bot { @apply -translate-y-[9.5px] -rotate-45; }
 
-/* ---------- lista enlaces ---------- */
-@utility ui-nav-list       { @apply hidden md:flex gap-6 items-center; }
-@utility ui-nav-list-open  { @apply flex flex-col gap-4 mt-6; }  /* visible en móvil al abrir */
-@utility ui-nav-link       { @apply hover:text-brand-300 focus-visible:outline-brand-500; }
+
+
+/* --- Panel Móvil (Mobile-First) --- */
+/* Estilos base del panel: oculto fuera de la pantalla por defecto */
+@utility ui-nav-mobile-panel {
+  @apply fixed inset-0 z-[50] bg-dark-800/90 backdrop-blur-sm
+         flex flex-col items-center justify-center gap-8
+         transition-transform duration-300 ease-in-out md:hidden;
+  transform: translateX(100%); /* <-- Inicia fuera de la pantalla a la derecha */
+  visibility: hidden;
+}
+
+/* Estado abierto: se desliza a la vista */
+@utility ui-nav-mobile-panel--open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+/* --- Enlaces de Navegación --- */
+/* Contenedor de enlaces: oculto en móvil, visible en desktop */
+@utility ui-nav-links-desktop {
+  @apply hidden md:flex items-center gap-6 lg:gap-8;
+}
+
+/* Estilo común para todos los enlaces de navegación (móvil y desktop) */
+@utility ui-nav-link {
+  @apply font-display tracking-wider text-text-light text-lg
+         transition-colors hover:text-brand-300
+         focus-visible:outline-none focus-visible:ring-2
+         focus-visible:ring-offset-2 focus-visible:ring-offset-dark-900
+         focus-visible:ring-brand-500 rounded;
+}
+
+/* --- Consistencia en el CTA (Botón Contacto) --- */
+/* Se aplica tanto en el botón de desktop como en el de móvil para consistencia */
+@utility ui-nav-cta {
+   /* Hereda de ui-btn-primary pero con la fuente de la navegación */
+  @apply ui-btn-primary font-display tracking-wider;
+}
